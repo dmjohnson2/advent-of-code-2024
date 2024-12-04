@@ -3,6 +3,6 @@
 
 int day_1(void);
 int day_2(void);
-long day_3(void);
+long day_3(int partTwo);
 
 #endif
