@@ -13,13 +13,14 @@ static int _cmp_func(const void *a, const void *b)
 	return x - y;
 }
 
-int day_1(void)
+int day_1(int partTwo)
 {
 	FILE *f = fopen("./input/day1.txt", "r");
 	char buffer[256];
 	size_t count = 0;
 	unsigned int sizeMult = 1;
 	unsigned int totalDiff = 0;	
+	unsigned int simScore = 0;
 
 	if (!f) 
 	{
@@ -52,8 +53,33 @@ int day_1(void)
 		totalDiff += abs(left[j] - right[j]);
 	}
 
+	if (!partTwo) return totalDiff;
+
+	size_t countLeft = 0;
+	size_t countRight = 0;
+	unsigned int occ = 0;
+
+	while (countLeft < count && countRight < count)
+	{
+		if (left[countLeft] == right[countRight])
+		{
+			occ++;
+			countRight++;
+		}
+		else if (left[countLeft] < right[countRight])
+		{
+			simScore = simScore + (left[countLeft] * occ);
+			countLeft++;
+			occ = 0;
+		}
+		else
+		{
+			countRight++;
+		}
+	}
+
 	free(left);
 	free(right);
 
-	return totalDiff;
+	return simScore;
 }
