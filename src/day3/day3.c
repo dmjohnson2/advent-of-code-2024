@@ -15,6 +15,12 @@ long day_3(int partTwo)
 	char buffer[4096];
 	long res = 0;
 
+	if (!f) 
+	{
+		fprintf(stderr, "Uh, where's the input? Do you know what you're doing?\n");
+		exit(EXIT_FAILURE);
+	}
+
 	// woo more nested loops.
 	while(fgets(buffer, sizeof(buffer), f))
 	{

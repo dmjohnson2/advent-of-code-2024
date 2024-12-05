@@ -3,38 +3,50 @@
 #include <string.h>
 
 #include "../../include/solutions.h"
+#include "../../include/arena.h"
 
 #define SIZE 10 
 #define MAX_DIFF 3
 
-static int _check_safety(int *report, int tokCount, int *safeReports)
+static int * _remove_level(Arena *arena, int *report, size_t idx, size_t tokCount)
 {
-	int desc = 1;
-	int asc = 1;
+	int *newReport = a_alloc(arena, sizeof(int) * tokCount - 1, __alignof(int));
+	int newIdx = 0;
 
-	for (size_t i = 0; i < (size_t)tokCount - 1; i++)
+	for (size_t i = 0; i < tokCount; i++)
+	{
+		if (i == idx) continue;
+
+		newReport[newIdx++] = report[i];
+	}
+
+	return newReport;
+}
+
+static int _check_safety(int *report, size_t tokCount)
+{
+	int desc = 0;
+	int asc = 0;
+
+	for (size_t i = 0; i < tokCount - 1; i++)
 	{
 		int diff = abs(report[i] - report[i + 1]);
 
-		if (report[i] > report[i + 1]) asc = 0;
-		else if (report[i] < report[i + 1]) desc = 0;
-		else return 0;
+		if (report[i] > report[i + 1]) asc++;
+		else if (report[i] < report[i + 1]) desc++;
+		else return i;
 
-		if (diff > MAX_DIFF) return 0;
+		if ((diff > MAX_DIFF) || (asc && desc)) return i;
 	}
 
-	if (!asc && !desc) return 0;
-
-	(*safeReports)++;
-
-	return 1;
+	return -1;
 }
 
-int day_2(void)
+int day_2(int partTwo)
 {
 	FILE *f = fopen("./input/day2.txt", "r");
+
 	char buffer[256];
-	size_t reportCount = 0;
 	int safeReports = 0;
 
 	if (!f) 
@@ -43,9 +55,12 @@ int day_2(void)
 		exit(EXIT_FAILURE);
 	}
 
-	for (; fgets(buffer, sizeof(buffer), f); reportCount++)
+	Arena arena = a_new(512);
+
+	while (fgets(buffer, sizeof(buffer), f))
 	{
-		int *report = malloc(sizeof(int) * SIZE);
+
+		int *rpt = a_alloc(&arena, sizeof(int) * SIZE, __alignof(int));
 		int tokCount = 0;
 		char *tok;
 
@@ -53,15 +68,29 @@ int day_2(void)
 
 		for (; tok; tokCount++)
 		{
-			report[tokCount] = atoi(tok);
+			rpt[tokCount] = atoi(tok);
 			tok = strtok(NULL, " ");
 		}
 
-		_check_safety(report, tokCount, &safeReports);
-		
-		free(report);
+		int res = _check_safety(rpt, tokCount);
+
+		if (res == -1)
+		{
+			safeReports++;
+			continue;
+		}
+
+		if (!partTwo) continue;
+
+		if (_check_safety(_remove_level(&arena, rpt, res, tokCount), tokCount - 1) == -1 ||
+			_check_safety(_remove_level(&arena, rpt, res + 1, tokCount), tokCount - 1) == -1 ||
+			_check_safety(_remove_level(&arena, rpt, res - 1, tokCount), tokCount - 1) == -1)
+		{
+			safeReports++;
+		}
 	}
 
+	a_free(&arena);
 	fclose(f);
 
 	return safeReports;
