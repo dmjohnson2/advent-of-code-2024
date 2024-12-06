@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -MMD -MP
 
-SRC_DIRS = src src/day1 src/day2 src/day3
+SRC_DIRS = src src/day1 src/day2 src/day3 src/day4
 OBJ_DIR = obj
 
 SOURCES = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
