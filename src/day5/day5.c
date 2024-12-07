@@ -39,7 +39,7 @@ static int _check_update(int rules[SIZE][SIZE], int *update, size_t updateCnt)
 	return update[updateCnt / 2];
 }
 
-static int _fix_update(int rules[100][100], int *update, size_t updateCnt)
+static int _fix_update(int rules[SIZE][SIZE], int *update, size_t updateCnt)
 {
 	size_t i = 0;
 	size_t j = 0;
