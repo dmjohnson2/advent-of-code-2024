@@ -157,6 +157,7 @@ int day_4(int partTwo)
 	{
 		res = _search_pt2(ws, lineLength, cnt);
 
+		fclose(f);
 		a_free(&ar);
 		return res;
 	}
@@ -165,6 +166,7 @@ int day_4(int partTwo)
 	res += _search_dgl(ws, lineLength, cnt);
 
 	a_free(&ar);
+	fclose(f);
 
 	return res;
 }

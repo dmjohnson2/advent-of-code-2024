@@ -53,7 +53,13 @@ int day_1(int partTwo)
 		totalDiff += abs(left[j] - right[j]);
 	}
 
-	if (!partTwo) return totalDiff;
+	if (!partTwo)
+	{
+		free(left);
+		free(right);
+
+		return totalDiff;
+	}
 
 	size_t countLeft = 0;
 	size_t countRight = 0;

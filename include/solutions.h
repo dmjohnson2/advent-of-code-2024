@@ -12,12 +12,12 @@
 			fprintf(stderr, "Uh, where's the input? Do you know what you're doing?\n"); \
 			exit(EXIT_FAILURE); \
 		} \
-	} \
-	while (0) \
+	} while (0) \
 
 int day_1(int partTwo);
 int day_2(int partTwo);
 long day_3(int partTwo);
 int day_4(int partTwo);
+int day_5(int partTwo);
 
 #endif
