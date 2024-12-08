@@ -14,10 +14,8 @@
 		} \
 	} while (0) \
 
-int day_1(int partTwo);
-int day_2(int partTwo);
-long day_3(int partTwo);
-int day_4(int partTwo);
-int day_5(int partTwo);
-
+#define SOL(type, day) \
+	type day_##day(int partTwo);
+#include "../include/solutions_table.h"
+#undef SOL
 #endif
