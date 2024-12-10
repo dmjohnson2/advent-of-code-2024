@@ -9,7 +9,7 @@ static void _check_status(int pos, char *buf);
 
 static int status = 1; 
 
-long day_3(int partTwo)
+long day_3(short partTwo)
 {
 	FILE *f = fopen("./input/day3.txt", "r");
 	char buffer[4096];

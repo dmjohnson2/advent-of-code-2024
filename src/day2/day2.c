@@ -42,7 +42,7 @@ static int _check_safety(int *report, size_t tokCount)
 	return -1;
 }
 
-int day_2(int partTwo)
+int day_2(short partTwo)
 {
 	FILE *f = fopen("./input/day2.txt", "r");
 

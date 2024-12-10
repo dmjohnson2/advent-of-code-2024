@@ -15,7 +15,7 @@
 	} while (0) \
 
 #define SOL(type, day) \
-	type day_##day(int partTwo);
+	type day_##day(short partTwo);
 #include "../include/solutions_table.h"
 #undef SOL
 #endif

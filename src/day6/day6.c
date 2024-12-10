@@ -132,7 +132,7 @@ static void _travel_part_two(char **lab, int partTwo)
 	}
 }
 
-int day_6(int partTwo)
+int day_6(short partTwo)
 {
 	FILE *f = fopen("./input/day6.txt", "r");
 	char buffer[133];

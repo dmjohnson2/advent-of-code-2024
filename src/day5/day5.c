@@ -64,7 +64,7 @@ static int _fix_update(int rules[SIZE][SIZE], int *update, size_t updateCnt)
 	return update[updateCnt / 2];
 }
 
-int day_5(int partTwo)
+int day_5(short partTwo)
 {
 	FILE *f = fopen("./input/day5.txt", "r");
 	char buffer[150];

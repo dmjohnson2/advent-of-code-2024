@@ -131,7 +131,7 @@ static int _search_vrt(char **ws, size_t cnt)
 	return res;
 }
 
-int day_4(int partTwo)
+int day_4(short partTwo)
 {
 	FILE *f = fopen("./input/day4.txt", "r");
 	char buffer[BUF_SIZE];

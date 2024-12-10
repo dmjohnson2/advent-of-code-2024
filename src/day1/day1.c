@@ -13,7 +13,7 @@ static int _cmp_func(const void *a, const void *b)
 	return x - y;
 }
 
-int day_1(int partTwo)
+int day_1(short partTwo)
 {
 	FILE *f = fopen("./input/day1.txt", "r");
 	char buffer[256];
